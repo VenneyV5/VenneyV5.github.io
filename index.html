@@ -55,7 +55,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/algorithm/">算法笔记</a></li>
+				<li><a href="/tags/numerical/">数值分析</a></li>
 	        
 				<li><a href="/tags/datastructure/">数据结构</a></li>
 	        
@@ -147,7 +147,7 @@
 				
 					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/algorithm/">算法笔记</a></li>
+					<li style="width: 20%"><a href="/tags/numerical/">数值分析</a></li>
 		        
 					<li style="width: 20%"><a href="/tags/datastructure/">数据结构</a></li>
 		        
@@ -169,6 +169,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-interpolation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/18/interpolation/">拉格朗日插值与牛顿差值</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/18/interpolation/" class="archive-article-date">
+  	<time datetime="2019-09-18T13:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;在现实生活中，我们经常有离散的点数据，想根据许多点的数据来推出背后的函数关系。因而诞生了插值和拟合。插值和拟合都是用来从样本点数据来推导函数的，其中插值是方法是经过每一个已知点，而拟合只需反映出点的趋势，根据点到函数间最小间距和来求得，亦即为最小二乘法。</p>
+<h2 id="线性插值到-n-次插值"><a href="#线性插值到-n-次插值" class="headerlink" title="线性插值到$n$次插值"></a>线性插值到$n$次插值</h2><p>&emsp;&emsp;已知两点$A(x_1,y_1),B(x_2,y_2)$ ，我们若想知道其两点间的数据情况，只需得到其函数关系即可。最简单的方法就是将两个点代入$y=ax+b$之中，解得一个一元二次方程即可。然而，在两个点时尚可快速解出，点的数量一旦非常多时，效率就很低下。拉格朗日和牛顿分别通过构造的方法得出了更快的写法。通过证明，多项式插值具有唯一解。也就是说，这两种方法化简到最后的形式是一样的。</p>
+<h3 id="1-拉格朗日插值法"><a href="#1-拉格朗日插值法" class="headerlink" title="1.拉格朗日插值法"></a>1.拉格朗日插值法</h3><p>&emsp;&emsp;拉格朗日的构造方法如下：</p>
+<script type="math/tex; mode=display">\phi(x)=y_{0}l_{0}(x)+y_{1}l_{1}(x)</script><p>&emsp;&emsp;若想让插值函数$\phi(x)$经过每个点，那么必然需要$\phi(x<em>{0})=y</em>{0}$和$\phi(x<em>{1})=y</em>{1}$。也就是说，需要上式满足</p>
+<script type="math/tex; mode=display">l_{0}(x)=
+\begin{cases}
+1,x=x_{0}\\
+0,x=x_{1}
+\end{cases}
+l_{1}(x)=
+\begin{cases}
+1,x=x_{1}\\
+0,x=x_{0}
+\end{cases}</script><p>&emsp;&emsp;因而，我们现在的任务就是推导这样的函数$l_i(x)$,为了让$l_1(x)=0（x=x_1)$，因而在构造时需要有$(x-x_1)$。不妨令$l_0(x)=A(x-x_1)$，为了使$l_0(x_0)=1$,只需让$A=\frac{1}{(x_0-x_1)}$即可。得到$l_0(x)=\frac{x-x_1}{(x_0-x_1)}$<br>&emsp;&emsp;综上，我们得到了插值函数</p>
+<script type="math/tex; mode=display">\phi(x)=\frac{x-x_{1}}{(x_{0}-x_{1})}y_{0}+\frac{x-x_{0}}{(x_{1}-x_{0})}y_{1}</script><h3 id="2-牛顿插值"><a href="#2-牛顿插值" class="headerlink" title="2.牛顿插值"></a>2.牛顿插值</h3><p>&emsp;&emsp;牛顿插值法是使用差商的形式进行表达。将$f(x)$在$x<em>{1},x</em>{0}$处的一阶均差记为$f[x_0,x_1]$，其定义为</p>
+<script type="math/tex; mode=display">f[x_0,x_1]=\frac{f(x_1)-f(x_0)}{x_1-x_0}</script><p>&emsp;&emsp;因为均差有对称性，即$x<em>{1},x</em>{0}$可交换位置。则插值函数可记为</p>
+<script type="math/tex; mode=display">\phi(x)=f(x_0)+(x-x_0)f[x_0,x_1]</script><p>&emsp;&emsp;一阶时，牛顿插值法可能还看不出明显的书写上的优势。我们可以推导一下二阶时的样子。当已知点为三个点时，即$(x_0,y_0),(x_1,y_1)和(x_2,y_2)$时。插值函数的形式只是在上式的基础上多加了一项。</p>
+<script type="math/tex; mode=display">\phi(x)=f(x_0)+(x-x_0)f[x_0,x_1]+(x-x_0)(x-x_1)f[x_0,x_1,x_2]</script><p>&emsp;&emsp;其中，二阶均差是有两个一阶均差做均差所得，具体形式如下</p>
+<script type="math/tex; mode=display">f[x_0,x_1,x_2]=\frac{f[x_0,x_1]-f[x_1,x_2]}{x_0-x_2}</script><p>&emsp;&emsp;由此，我们可以推出$n$阶均差为</p>
+<script type="math/tex; mode=display">f[x_0,x_1,x_2,...,x_n]=\frac{f[x_0,x_1,...,x_{n-1}]-f[x_1,x_2,...,x_{n}]}{x_0-x_n}</script><p>&emsp;&emsp;$n$次牛顿插值的形式如下</p>
+<script type="math/tex; mode=display">\phi(x)=f(x_0)+(x-x_0)f[x_0,x_1]+(x-x_0)(x-x_1)f[x_0,x_1,x_2]+...+(x-x_0)...(x-x_{n-2})f[x_0,x_1,x_2,...,x_n]</script><p>&emsp;&emsp;由此可见，牛顿插值有一个明显的好处，就是每增加一个插值点，只需要在原来的基础上多算一个均差即可。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">numerical</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/18/interpolation/">Show all >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-pdepe" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -216,8 +310,8 @@ u(x,0)=sin\frac{\pi x}{2}
 <p>&emsp;&emsp;建议将定义的各类条件分别建成多个文件，将pdefun.m，icfun.m，bcfun.m和主程序置于一个文件夹中，用主程序调用，便于阅读和修改。</p>
 <h2 id="3-可视化"><a href="#3-可视化" class="headerlink" title="3.可视化"></a>3.可视化</h2><p><div align="center">
     <img src="/2019/09/09/pdepe/3.png">
-</div><br>&emsp;&emsp;Matlab官方文档建议使用surf函数来对偏微分方程的结果进行可视化。可以方便的看出结果在x和t方向上的变化情况。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u = sol(:,:,<span class="number">1</span>);</span><br><span class="line">surf(x,t,u) </span><br><span class="line">title(<span class="string">'Numerical solution computed with 20 mesh points.'</span>)</span><br><span class="line">xlabel(<span class="string">'Distance x'</span>)</span><br><span class="line">ylabel(<span class="string">'Time t'</span>)</span><br></pre></td></tr></table></figure></p>
-
+</div><br>&emsp;&emsp;Matlab官方文档建议使用surf函数来对偏微分方程的结果进行可视化。可以方便的看出结果在x和t方向上的变化情况。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u = sol(:,:,<span class="number">1</span>);</span><br><span class="line">surf(x,t,u) </span><br><span class="line">title(<span class="string">'Numerical solution computed with 20 mesh points.'</span>)</span><br><span class="line">xlabel(<span class="string">'Distance x'</span>)</span><br><span class="line">ylabel(<span class="string">'Time t'</span>)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -386,6 +480,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">numerical</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">note</a>

@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/09/09/pdepe/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/09/pdepe/2.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/09/pdepe/3.png">
-<meta property="og:updated_time" content="2019-09-09T11:19:02.565Z">
+<meta property="og:updated_time" content="2019-09-09T14:50:06.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pdepe求解偏微分方程">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;pdepe是matlab内置的一个求解偏微分方程的函数，它适用于求解一维抛物-椭圆型 PDE 的初始边值问题。然而其语法和文档阅读起来不够友好，所以本文打算以一个具体实例为导向，描述下该函数的使用过程。 1.函数语法与参数&amp;emsp;&amp;emsp;在介绍实例之前，先说明一下该函数所需要用到的参数。123sol = pdepe(m,pdefun,icfun,bcfun,xmes">
@@ -64,7 +64,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/algorithm/">算法笔记</a></li>
+				<li><a href="/tags/numerical/">数值分析</a></li>
 	        
 				<li><a href="/tags/datastructure/">数据结构</a></li>
 	        
@@ -156,7 +156,7 @@
 				
 					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/algorithm/">算法笔记</a></li>
+					<li style="width: 20%"><a href="/tags/numerical/">数值分析</a></li>
 		        
 					<li style="width: 20%"><a href="/tags/datastructure/">数据结构</a></li>
 		        
@@ -223,8 +223,8 @@ u(x,0)=sin\frac{\pi x}{2}
 <p>&emsp;&emsp;建议将定义的各类条件分别建成多个文件，将pdefun.m，icfun.m，bcfun.m和主程序置于一个文件夹中，用主程序调用，便于阅读和修改。</p>
 <h2 id="3-可视化"><a href="#3-可视化" class="headerlink" title="3.可视化"></a>3.可视化</h2><p><div align="center">
     <img src="/2019/09/09/pdepe/3.png">
-</div><br>&emsp;&emsp;Matlab官方文档建议使用surf函数来对偏微分方程的结果进行可视化。可以方便的看出结果在x和t方向上的变化情况。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u = sol(:,:,<span class="number">1</span>);</span><br><span class="line">surf(x,t,u) </span><br><span class="line">title(<span class="string">'Numerical solution computed with 20 mesh points.'</span>)</span><br><span class="line">xlabel(<span class="string">'Distance x'</span>)</span><br><span class="line">ylabel(<span class="string">'Time t'</span>)</span><br></pre></td></tr></table></figure></p>
-
+</div><br>&emsp;&emsp;Matlab官方文档建议使用surf函数来对偏微分方程的结果进行可视化。可以方便的看出结果在x和t方向上的变化情况。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">u = sol(:,:,<span class="number">1</span>);</span><br><span class="line">surf(x,t,u) </span><br><span class="line">title(<span class="string">'Numerical solution computed with 20 mesh points.'</span>)</span><br><span class="line">xlabel(<span class="string">'Distance x'</span>)</span><br><span class="line">ylabel(<span class="string">'Time t'</span>)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -326,6 +326,20 @@ u(x,0)=sin\frac{\pi x}{2}
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2019/09/18/interpolation/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          拉格朗日插值与牛顿差值
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -339,6 +353,19 @@ u(x,0)=sin\frac{\pi x}{2}
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-函数语法与参数"><span class="toc-number">1.</span> <span class="toc-text">1.函数语法与参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-具体实例"><span class="toc-number">2.</span> <span class="toc-text">2.具体实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pdefun"><span class="toc-number">2.1.</span> <span class="toc-text">pdefun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#icfun"><span class="toc-number">2.2.</span> <span class="toc-text">icfun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bcfun"><span class="toc-number">2.3.</span> <span class="toc-text">bcfun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mainfunction"><span class="toc-number">2.4.</span> <span class="toc-text">mainfunction</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-可视化"><span class="toc-number">3.</span> <span class="toc-text">3.可视化</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -469,6 +496,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">numerical</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">note</a>
